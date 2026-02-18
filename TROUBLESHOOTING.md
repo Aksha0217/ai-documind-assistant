@@ -1,5 +1,20 @@
 # Troubleshooting Guide
 
+## Security Updates
+
+### Recent Security Fixes (February 2026)
+
+**FastAPI & python-multipart vulnerabilities fixed:**
+- Updated `fastapi` from 0.109.0 to >=0.109.1 (fixes ReDoS vulnerability)
+- Updated `python-multipart` from 0.0.6 to >=0.0.22 (fixes multiple vulnerabilities)
+
+If you installed before these fixes, please update:
+```bash
+cd backend
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install --upgrade -r requirements.txt
+```
+
 ## Common Issues and Solutions
 
 ### Issue: "Failed to resolve 'huggingface.co'" or Model Download Errors
