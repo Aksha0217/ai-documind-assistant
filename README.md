@@ -33,6 +33,28 @@ AI-DocuMind Assistant is a full-stack AI-powered web application that allows use
 
 ## 🚀 Getting Started
 
+### Quick Start (Using Scripts)
+
+For the easiest setup, use the provided scripts:
+
+```bash
+# Run setup (first time only)
+./setup.sh
+
+# Start the application
+./start.sh
+```
+
+The application will be available at:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
+
+Press Ctrl+C to stop both servers.
+
+### Manual Setup
+
+If you prefer manual setup, follow these steps:
+
 ### 1. Clone the Repository
 
 ```bash
