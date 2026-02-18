@@ -1,0 +1,46 @@
+AI-DocuMind Assistant - Test Document
+
+This is a sample document for testing the AI-DocuMind Assistant application.
+
+About the Application:
+The AI-DocuMind Assistant is a full-stack web application that uses Retrieval-Augmented Generation (RAG) to answer questions about uploaded documents. It supports PDF, DOCX, and TXT file formats.
+
+Key Features:
+1. Document Upload: Users can upload documents in multiple formats
+2. Text Extraction: The system automatically extracts text from documents
+3. Semantic Search: Uses embeddings to find relevant content
+4. Question Answering: Provides answers based on document content
+
+Technology Stack:
+- Backend: Python with FastAPI framework
+- Frontend: React with modern JavaScript
+- AI: Sentence Transformers for embeddings
+- Database: ChromaDB for vector storage
+
+How It Works:
+When a document is uploaded, the system:
+1. Extracts all text content
+2. Splits the text into manageable chunks
+3. Generates vector embeddings for each chunk
+4. Stores the embeddings in a vector database
+
+When a question is asked:
+1. The question is converted to an embedding
+2. Similar chunks are retrieved from the database
+3. The relevant text is used to generate an answer
+
+Benefits:
+- Privacy: All data stays on your server
+- Free: Uses only open-source tools
+- Fast: Efficient vector search for quick answers
+- Flexible: Works with multiple document formats
+
+Example Questions You Can Ask:
+- What is AI-DocuMind Assistant?
+- What file formats are supported?
+- How does the RAG system work?
+- What technology is used in the backend?
+- What are the key features?
+
+Conclusion:
+AI-DocuMind Assistant demonstrates the power of RAG for document analysis. It provides an easy way to extract insights from documents using modern AI techniques, all while maintaining privacy and using free, open-source tools.
