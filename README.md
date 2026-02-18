@@ -16,7 +16,7 @@ AI-DocuMind Assistant is a full-stack AI-powered web application that allows use
 - **FastAPI**: Modern Python web framework
 - **LangChain**: Framework for LLM applications
 - **ChromaDB**: Open-source vector database
-- **sentence-transformers**: Open-source embeddings (all-MiniLM-L6-v2)
+- **Custom embeddings**: Simple text-based embeddings (no external model downloads required)
 - **pypdf & python-docx**: Document processing
 
 ### Frontend

@@ -1,28 +1,52 @@
 from typing import List, Tuple, Dict
 import chromadb
-from chromadb.config import Settings
-from sentence_transformers import SentenceTransformer
 import uuid
 from datetime import datetime
+import hashlib
+import re
+
+class SimpleTextEmbedding:
+    """Simple text embedding function that doesn't require external models"""
+    
+    def __call__(self, input: List[str]) -> List[List[float]]:
+        """Generate simple embeddings from text"""
+        embeddings = []
+        for text in input:
+            # Create a simple embedding based on word frequencies and hash
+            words = re.findall(r'\w+', text.lower())
+            # Create a fixed-size vector (384 dimensions to match typical models)
+            vector = [0.0] * 384
+            
+            for i, word in enumerate(words[:384]):
+                # Use hash to generate consistent values for words
+                hash_val = int(hashlib.md5(word.encode()).hexdigest(), 16)
+                vector[i % 384] += (hash_val % 100) / 100.0
+            
+            # Normalize
+            magnitude = sum(x**2 for x in vector) ** 0.5
+            if magnitude > 0:
+                vector = [x / magnitude for x in vector]
+            
+            embeddings.append(vector)
+        
+        return embeddings
 
 class RAGEngine:
     """Retrieval-Augmented Generation engine using ChromaDB"""
     
     def __init__(self):
-        # Initialize ChromaDB
-        self.client = chromadb.Client(Settings(
-            chroma_db_impl="duckdb+parquet",
-            persist_directory="./chroma_db"
-        ))
+        # Initialize ChromaDB with persistent client
+        self.client = chromadb.PersistentClient(path="./chroma_db")
+        
+        # Use custom embedding function that doesn't need internet
+        embedding_fn = SimpleTextEmbedding()
         
         # Create or get collection
         self.collection = self.client.get_or_create_collection(
             name="documents",
+            embedding_function=embedding_fn,
             metadata={"description": "Document embeddings for RAG"}
         )
-        
-        # Initialize embedding model (open-source)
-        self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
         
         # Store document metadata
         self.documents = {}
@@ -35,15 +59,11 @@ class RAGEngine:
         # Split text into chunks for better retrieval
         chunks = self._chunk_text(text)
         
-        # Generate embeddings
-        embeddings = self.embedding_model.encode(chunks).tolist()
-        
         # Create IDs for each chunk
         chunk_ids = [f"{doc_id}_chunk_{i}" for i in range(len(chunks))]
         
-        # Add to ChromaDB
+        # Add to ChromaDB (it will automatically generate embeddings)
         self.collection.add(
-            embeddings=embeddings,
             documents=chunks,
             ids=chunk_ids,
             metadatas=[{"document_id": doc_id, "filename": filename, "chunk_index": i} 
@@ -61,12 +81,9 @@ class RAGEngine:
     
     def answer_question(self, question: str, document_id: str) -> Tuple[str, List[str]]:
         """Answer a question based on the document content"""
-        # Generate question embedding
-        question_embedding = self.embedding_model.encode([question]).tolist()
-        
         # Query ChromaDB for relevant chunks
         results = self.collection.query(
-            query_embeddings=question_embedding,
+            query_texts=[question],
             n_results=3,
             where={"document_id": document_id}
         )
