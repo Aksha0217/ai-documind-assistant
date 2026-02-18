@@ -1,0 +1,91 @@
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.App-header {
+  margin-bottom: 3rem;
+}
+
+.App-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #646cff;
+}
+
+.App-header p {
+  font-size: 1.2rem;
+  color: #888;
+}
+
+.App-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.upload-section {
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.upload-section h2 {
+  margin-bottom: 1rem;
+}
+
+.file-input {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.file-name {
+  margin-top: 1rem;
+  color: #888;
+  font-style: italic;
+}
+
+.analyze-button {
+  background-color: #646cff;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.analyze-button:hover:not(:disabled) {
+  background-color: #535bf2;
+}
+
+.analyze-button:disabled {
+  background-color: #444;
+  cursor: not-allowed;
+}
+
+.summary-section {
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+}
+
+.summary-section h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.summary-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: 1.6;
+  color: #ccc;
+}
