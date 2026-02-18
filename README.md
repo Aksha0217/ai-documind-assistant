@@ -153,7 +153,6 @@ This project is open source and available under the MIT License.
 ## 🙏 Acknowledgments
 
 - Built with open-source AI tools
-- sentence-transformers for embeddings
 - ChromaDB for vector storage
 - FastAPI and React communities
 
