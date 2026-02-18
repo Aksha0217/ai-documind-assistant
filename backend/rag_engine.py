@@ -16,7 +16,12 @@ class RAGEngine:
     def __init__(self):
         # Initialize embedding model (using free sentence-transformers)
         print("Loading embedding model...")
-        self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+        try:
+            self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+        except Exception as e:
+            print(f"Warning: Could not load model from HuggingFace: {e}")
+            print("The model will be downloaded on first use or you may need internet access.")
+            self.embedding_model = None
         
         # Initialize ChromaDB for vector storage
         print("Initializing vector database...")
@@ -40,6 +45,12 @@ class RAGEngine:
         
         print("RAG Engine initialized successfully")
     
+    def _ensure_model_loaded(self):
+        """Ensure the embedding model is loaded"""
+        if self.embedding_model is None:
+            print("Loading embedding model...")
+            self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+    
     def _load_metadata(self) -> dict:
         """Load document metadata from file"""
         if os.path.exists(self.metadata_file):
@@ -54,6 +65,9 @@ class RAGEngine:
     
     def process_document(self, file_path: str, doc_id: str, filename: str):
         """Process a document and add it to the vector database"""
+        
+        # Ensure model is loaded
+        self._ensure_model_loaded()
         
         # Extract text from document
         text = self.doc_processor.extract_text(file_path)
@@ -110,6 +124,9 @@ class RAGEngine:
         top_k: int = 3
     ) -> Tuple[str, List[str]]:
         """Answer a question using RAG"""
+        
+        # Ensure model is loaded
+        self._ensure_model_loaded()
         
         # Generate embedding for the question
         question_embedding = self.embedding_model.encode([question]).tolist()
