@@ -1,16 +1,25 @@
 # 🧠 AI-DocuMind Assistant
 
-An AI-powered full-stack web application for intelligent document analysis using Retrieval-Augmented Generation (RAG). Upload documents (PDF, DOCX, TXT), analyze them, and ask questions based on their content - all using 100% free and open-source tools.
+An AI-powered full-stack web application for intelligent document analysis using Retrieval-Augmented Generation (RAG). Upload documents (PDF, DOCX, TXT), analyze them, and ask questions based on their content - featuring stunning 3D animations and modern glassmorphism UI design. Built with 100% free and open-source tools.
 
 ## ✨ Features
 
+### Core Functionality
 - 📄 **Multi-format Support**: Upload and process PDF, DOCX, and TXT documents
 - 🤖 **RAG-Powered Q&A**: Ask questions and get answers based on document content
 - 💾 **Vector Database**: Uses ChromaDB for efficient similarity search
 - 🔍 **Smart Chunking**: Automatic text chunking with overlapping for better context
-- 🎨 **Modern UI**: Clean, responsive React interface with real-time chat
 - 🔒 **Privacy-First**: All data stays on your server
 - 💯 **100% Free**: No paid APIs or services required
+
+### 🎨 NEW: Modern 3D UI
+- ✨ **3D Animated Background**: Floating particles and 3D objects powered by Three.js
+- 🪟 **Glassmorphism Design**: Frosted glass effects with backdrop blur
+- 🎭 **Smooth Animations**: Framer Motion for buttery smooth transitions
+- 📱 **Fully Responsive**: Works beautifully on all devices
+- 🎯 **Interactive Elements**: Hover effects and micro-interactions
+- 🔔 **Toast Notifications**: Real-time feedback with react-hot-toast
+- 🌀 **3D Loading Spinners**: Elegant loading states
 
 ## 🛠️ Tech Stack
 
@@ -22,9 +31,14 @@ An AI-powered full-stack web application for intelligent document analysis using
 - **python-docx**: DOCX processing
 
 ### Frontend
-- **React**: UI library
+- **React 18**: UI library
+- **Three.js**: 3D graphics and animations
+- **@react-three/fiber**: React renderer for Three.js
+- **@react-three/drei**: Useful helpers for React Three Fiber
+- **Framer Motion**: Animation library
+- **React Hot Toast**: Toast notifications
 - **Axios**: HTTP client
-- **Modern CSS**: Responsive design with gradients
+- **Modern CSS**: Glassmorphism and responsive design
 
 ## 📋 Prerequisites
 
@@ -116,6 +130,39 @@ The frontend will be available at `http://localhost:3000`
    - View all uploaded documents in the sidebar
    - Select a specific document to query
    - Delete documents when no longer needed
+
+## 🚢 Deployment
+
+### Vercel Deployment (Recommended)
+
+The application is fully configured for Vercel deployment with the included `vercel.json`:
+
+1. **Fork or clone** this repository
+2. **Connect to Vercel**:
+   - Go to [Vercel Dashboard](https://vercel.com/dashboard)
+   - Click "New Project"
+   - Import your repository
+   - Vercel auto-detects configuration
+3. **Deploy**: Click "Deploy" and you're done!
+
+The app includes:
+- ✅ Serverless backend functions
+- ✅ Optimized frontend build
+- ✅ Automatic API routing
+- ✅ Production-ready configuration
+
+For detailed instructions, see [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md)
+
+### Build for Production
+
+```bash
+# Build frontend
+cd frontend
+npm run build
+
+# The build folder is ready to be deployed
+# Serve with any static hosting service
+```
 
 ## 🔧 API Endpoints
 
